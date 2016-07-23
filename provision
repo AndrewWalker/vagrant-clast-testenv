@@ -17,12 +17,3 @@ sudo apt-get install -y clang-${LLVM_VERSION} \
 
 sudo -H -u vagrant bash -c "/vagrant/userspace-setup $LLVM_VERSION"
 
-#rm -f /home/vagrant/bashext.sh
-#cat "export LLVM_HOME=/usr/lib/llvm-${LLVM_VERSION}" >> /home/vagrant/bashext.sh
-#cat 'export PATH=$PATH:$LLVM_HOME/bin' >> /home/vagrant/bashext.sh
-#cat 'export LD_LIBRARY_PATH=$LLVM_HOME/lib' >> /home/vagrant/bashext.sh
-
-#if ! grep -Fxq "source /home/vagrant/bashext.sh" /home/vagrant/.bashrc; then
-    #echo "source /home/vagrant/bashext.sh" >> /home/vagrant/.bashrc
-#fi
-
