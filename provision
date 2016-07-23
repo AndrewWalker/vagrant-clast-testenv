@@ -1,0 +1,28 @@
+#!/bin/bash
+
+LLVM_VERSION="$1"
+echo "LLVM_VERSION $LLVM_VERSION"
+
+wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
+sudo cp /vagrant/sources.list /etc/apt/sources.list
+sudo cp /vagrant/sources.list.d/llvm.list /etc/apt/sources.list.d/llvm.list
+sudo apt-get update -qq
+sudo apt-get install -y clang-${LLVM_VERSION} \
+    libclang-common-${LLVM_VERSION}-dev \
+    libclang-${LLVM_VERSION}-dev \
+    llvm-${LLVM_VERSION}-dev \
+    liblldb-${LLVM_VERSION}-dev \
+    python-clang-${LLVM_VERSION} \
+    git-core 
+
+sudo -H -u vagrant bash -c "/vagrant/userspace-setup $LLVM_VERSION"
+
+#rm -f /home/vagrant/bashext.sh
+#cat "export LLVM_HOME=/usr/lib/llvm-${LLVM_VERSION}" >> /home/vagrant/bashext.sh
+#cat 'export PATH=$PATH:$LLVM_HOME/bin' >> /home/vagrant/bashext.sh
+#cat 'export LD_LIBRARY_PATH=$LLVM_HOME/lib' >> /home/vagrant/bashext.sh
+
+#if ! grep -Fxq "source /home/vagrant/bashext.sh" /home/vagrant/.bashrc; then
+    #echo "source /home/vagrant/bashext.sh" >> /home/vagrant/.bashrc
+#fi
+

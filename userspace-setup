@@ -1,0 +1,23 @@
+#!/bin/bash
+
+LLVM_VERSION="$1"
+echo "LLVM_VERSION $LLVM_VERSION"
+
+rm -f /home/vagrant/bashext.sh
+touch /home/vagrant/bashext.sh
+echo "export LLVM_HOME=/usr/lib/llvm-${LLVM_VERSION}" >> /home/vagrant/bashext.sh
+echo 'export PATH=$LLVM_HOME/bin:~/miniconda3/bin:$PATH' >> /home/vagrant/bashext.sh
+echo 'export LD_LIBRARY_PATH=$LLVM_HOME/lib' >> /home/vagrant/bashext.sh
+
+if ! grep -Fxq "source /home/vagrant/bashext.sh" /home/vagrant/.bashrc; then
+    echo "source /home/vagrant/bashext.sh" >> /home/vagrant/.bashrc
+fi
+
+if [[ ! -d "/home/vagrant/miniconda3" ]]; then
+	bash /vagrant/Miniconda3-latest-Linux-x86_64.sh -b
+fi
+
+if [[ ! -d "/home/vagrant/clast" ]]; then
+    git clone https://github.com/AndrewWalker/clast.git
+fi
+
