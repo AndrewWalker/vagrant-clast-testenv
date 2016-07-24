@@ -9,6 +9,9 @@ echo "export LLVM_HOME=/usr/lib/llvm-${LLVM_VERSION}" >> /home/vagrant/bashext.s
 echo 'export PATH=$LLVM_HOME/bin:~/miniconda3/bin:$PATH' >> /home/vagrant/bashext.sh
 echo 'export LD_LIBRARY_PATH=$LLVM_HOME/lib' >> /home/vagrant/bashext.sh
 
+rm -f /home/vagrant/.bash_profile
+echo 'source /home/vagrant/bashext.sh' >> /home/vagrant/.bash_profile
+
 if ! grep -Fxq "source /home/vagrant/bashext.sh" /home/vagrant/.bashrc; then
     echo "source /home/vagrant/bashext.sh" >> /home/vagrant/.bashrc
 fi

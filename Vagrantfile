@@ -29,7 +29,6 @@ Vagrant.configure(2) do |config|
       end  
       node.vm.provision "shell" do |s|
         s.inline = "/vagrant/provision $1"
-        #s.inline = "echo $1"
         s.args   = machine[:provags]
       end
     end
