@@ -5,7 +5,7 @@ echo "LLVM_VERSION $LLVM_VERSION"
 
 wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
 sudo cp /vagrant/sources.list /etc/apt/sources.list
-sudo cp /vagrant/sources.list.d/llvm.list /etc/apt/sources.list.d/llvm.list
+sudo cp /vagrant/sources.list.d/llvm-${LLVM_VERSION}.list /etc/apt/sources.list.d/llvm.list
 sudo apt-get update -qq
 sudo apt-get install -y clang-${LLVM_VERSION} \
     libclang-common-${LLVM_VERSION}-dev \
@@ -13,7 +13,8 @@ sudo apt-get install -y clang-${LLVM_VERSION} \
     llvm-${LLVM_VERSION}-dev \
     liblldb-${LLVM_VERSION}-dev \
     python-clang-${LLVM_VERSION} \
-    git-core 
+    git-core \
+    g++
 
 sudo -H -u vagrant bash -c "/vagrant/userspace-setup $LLVM_VERSION"
 
